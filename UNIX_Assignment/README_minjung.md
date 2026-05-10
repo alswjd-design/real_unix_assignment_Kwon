@@ -353,7 +353,7 @@ Before joining, both files must be sorted by the common column SNP_ID.
 
 
 #### Verification 
-     ```bash
+   ```bash
   wc -l
-     ```
+   ```
 
