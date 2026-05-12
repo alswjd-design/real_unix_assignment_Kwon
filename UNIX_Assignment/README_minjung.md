@@ -172,7 +172,7 @@ Join needs the same column. But The fang_et_al_genotypes.txt file has samples in
 
     
 
- * Include the header and maize groups
+* Include the header and maize groups
 ```bash
 head -n 1 fang_et_al_genotypes.txt > maize_genotypes.txt
 ```
@@ -246,7 +246,7 @@ Before joining, both files must be sorted by the common column SNP_ID.
     * Unknown positions        
 
         ```bash
-      grep “unknwon” joined_maize.txt > maize_unknown_pos.txt
+      grep “unknown” joined_maize.txt > maize_unknown_pos.txt
         ```
 
     * Multiple positions        
