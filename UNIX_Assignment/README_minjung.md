@@ -271,22 +271,22 @@ wc -l
 
 Join needs the same column. But The fang_et_al_genotypes.txt file has samples in rows and SNPs in columns, but my final output needs SNPs in rows.
 
-  * Include the header and maize groups         
+* Include the header and maize groups         
 
-     ``` bash
-    head -n 1 fang_et_al_genotypes.txt > teosinte_genotypes.txt
-     ```
+``` bash
+head -n 1 fang_et_al_genotypes.txt > teosinte_genotypes.txt
+```
 
 
-    ```bash
-    grep -E "(ZMPBA|ZMPIL|ZMPJA)" fang_et_al_genotypes.txt >> teosinte_genotypes.txt
-    ```
+```bash
+grep -E "(ZMPBA|ZMPIL|ZMPJA)" fang_et_al_genotypes.txt >> teosinte_genotypes.txt
+```
 
-   * Transpose the file so snps are rows     
+* Transpose the file so snps are rows     
 
-     ```bash
-     awk -f transpose.awk teosinte_genotypes.txt > transposed_teosinte.txt
-     ```
+```bash
+awk -f transpose.awk teosinte_genotypes.txt > transposed_teosinte.txt
+```
 
 
 
