@@ -192,11 +192,11 @@ awk -f transpose.awk maize_genotypes.txt > transposed_maize.txt
 
 Snp_id = 1, chromosome = 3, position = 4 in original file
 
-    * Extract the targeted columns except the header to avoid it interfering with the sort command later        
+* Extract the targeted columns except the header to avoid it interfering with the sort command later        
 
-        ```bash
-        tail -n +2 snp_position.txt | cut -f 1,3,4 | sort -k1,1 > sorted_snp_pos.txt
-        ```
+```bash
+tail -n +2 snp_position.txt | cut -f 1,3,4 | sort -k1,1 > sorted_snp_pos.txt
+```
 
 
 
@@ -204,56 +204,56 @@ Snp_id = 1, chromosome = 3, position = 4 in original file
 
 Before joining, both files must be sorted by the common column SNP_ID.
 
-    * Remove the first three rows of transposed maize (sample_id, JG_OTU, and Group) and sort by snp_id
+* Remove the first three rows of transposed maize (sample_id, JG_OTU, and Group) and sort by snp_id
 
-        ``` bash
-        tail -n +4 transposed_maize.txt | sort -k1,1 > sorted_maize.txt
-        ```
+``` bash
+tail -n +4 transposed_maize.txt | sort -k1,1 > sorted_maize.txt
+```
 
-    * Join the files     
+* Join the files     
 
-        ```
-        join -1 1 -2 1 -t $’\t’ sorted_snp_pos.txt sorted_maize.txt > joined_maize.txt
-        ```
-
-
+```
+join -1 1 -2 1 -t $’\t’ sorted_snp_pos.txt sorted_maize.txt > joined_maize.txt
+```
 
 
- #### Generating the 20 chromosome files
 
-    * Install bioawk program        
 
-        ```bash
-      module load bioawk
-        ```
+#### Generating the 20 chromosome files
 
-    * Files with increasing position and missing data = ?
+* Install bioawk program        
 
-        ```bash
-      for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_maize.txt | sort -k3,3n > maize_chr${i}_inc.txt; done
-        ```
+```bash
+module load bioawk
+```
 
-    * Files with decreasing position and missing data = -      
+* Files with increasing position and missing data = ?
 
-        ```bash
-      for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_maize.txt | sed 's/?/-/g' | sort -k3,3nr > maize_chr${i}_dec.txt; done
-        ```
+```bash
+for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_maize.txt | sort -k3,3n > maize_chr${i}_inc.txt; done
+```
+
+* Files with decreasing position and missing data = -      
+
+```bash
+for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_maize.txt | sed 's/?/-/g' | sort -k3,3nr > maize_chr${i}_dec.txt; done
+```
 
 
 
 #### Handling unknown and multiple positions
 
-    * Unknown positions        
+* Unknown positions        
 
-        ```bash
-      grep “unknown” joined_maize.txt > maize_unknown_pos.txt
-        ```
+```bash
+grep “unknown” joined_maize.txt > maize_unknown_pos.txt
+```
 
-    * Multiple positions        
+* Multiple positions        
 
-        ```bash
-      grep “multiple” joined_maize.txt > maize_multiple_pos.txt
-        ```
+```bash
+grep “multiple” joined_maize.txt > maize_multiple_pos.txt
+```
 
 
 
@@ -294,66 +294,66 @@ Join needs the same column. But The fang_et_al_genotypes.txt file has samples in
 
 Before joining, both files must be sorted by the common column SNP_ID.
 
-    * Extra care easily ignored dots     
+* Extra care easily ignored dots     
 
-        ```bash
-        export LC_ALL=C
-        ```
+```bash
+export LC_ALL=C
+```
 
-    * Remove the first three rows of transposed teosinte (Sample_ID, JG_OTU, and Group) and sort by SNP_ID     
+* Remove the first three rows of transposed teosinte (Sample_ID, JG_OTU, and Group) and sort by SNP_ID     
 
-        ```bash
-        tail -n +4 transposed_teosinte.txt | sort -k1,1 > sorted_teosinte.txt
-        ```
+```bash
+tail -n +4 transposed_teosinte.txt | sort -k1,1 > sorted_teosinte.txt
+```
 
-    * Join the files, which are tab-delimited     
+* Join the files, which are tab-delimited     
 
-        ```bash
-        join -1 1 -2 1 -t $’\t’ sorted_snp_pos.txt sorted_teosinte.txt > joined_teosinte.txt
-        ```
+```bash
+join -1 1 -2 1 -t $’\t’ sorted_snp_pos.txt sorted_teosinte.txt > joined_teosinte.txt
+```
 
 
 
 #### Generating the 20 chromosome files
 
-    * Install bioawk program     
+* Install bioawk program     
 
-        ```bash
-      module load bioawk
-        ```
+```bash
+module load bioawk
+```
 
-    * Files with increasing position and missing data = ?    
+* Files with increasing position and missing data = ?    
 
-        ```bash
-      for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_teosinte.txt | sort -k3,3n > teosinte_chr${i}_inc.txt; done
-        ```
+```bash
+for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_teosinte.txt | sort -k3,3n > teosinte_chr${i}_inc.txt; done
+```
 
-    * Files with decreasing position and missing data = -    
+* Files with decreasing position and missing data = -    
 
-        ```bash
-      for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_teosinte.txt | sed 's/?/-/g' | sort -k3,3nr > teosinte_chr${i}_dec.txt; done
-        ```
+```bash
+for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_teosinte.txt | sed 's/?/-/g' | sort -k3,3nr > teosinte_chr${i}_dec.txt; done
+```
 
 
 
 #### Handling unknown and multiple positions
 
-    * Unknown positions     
+* Unknown positions     
 
-        ```bash
-      grep “unknown” joined_teosinte.txt > teosinte_unknown_pos.txt
-        ```
+```bash
+grep “unknown” joined_teosinte.txt > teosinte_unknown_pos.txt
+```
 
-    * Multiple positions     
+* Multiple positions     
 
-        ```bash
-      grep “multiple” joined_teosinte.txt > teosinte_multiple_pos.txt
-        ```
+```bash
+grep “multiple” joined_teosinte.txt > teosinte_multiple_pos.txt
+```
 
 
 
 #### Verification 
-   ```bash
-  wc -l
-   ```
+```bash
+wc -l
+```
 
