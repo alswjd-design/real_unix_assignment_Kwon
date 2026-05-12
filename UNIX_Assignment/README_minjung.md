@@ -190,7 +190,7 @@ awk -f transpose.awk maize_genotypes.txt > transposed_maize.txt
 
 #### Prepare the SNP position file 
 
-Snp_id = 1, chromosome = 3, position = 4 in original file
+SNP_ID = 1st, Chromosome = 3rd, Position = 4th in original file
 
 * Extract the targeted columns except the header to avoid it interfering with the sort command later        
 
@@ -212,7 +212,7 @@ tail -n +4 transposed_maize.txt | sort -k1,1 > sorted_maize.txt
 
 * Join the files     
 
-```
+```bash
 join -1 1 -2 1 -t $’\t’ sorted_snp_pos.txt sorted_maize.txt > joined_maize.txt
 ```
 
@@ -246,21 +246,21 @@ for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_maize.txt | se
 * Unknown positions        
 
 ```bash
-grep “unknown” joined_maize.txt > maize_unknown_pos.txt
+grep unknown joined_maize.txt > maize_unknown_pos.txt
 ```
 
 * Multiple positions        
 
 ```bash
-grep “multiple” joined_maize.txt > maize_multiple_pos.txt
+grep multiple joined_maize.txt > maize_multiple_pos.txt
 ```
 
 
 
-#### Verification 
+#### Verification to prevent empty files
 
 ```bash
-wc -l
+wc -l maize_chr* maize_unknown_pos.txt maize_multiple_pos.txt
 ```
 
 
@@ -294,7 +294,7 @@ awk -f transpose.awk teosinte_genotypes.txt > transposed_teosinte.txt
 
 Before joining, both files must be sorted by the common column SNP_ID.
 
-* Extra care easily ignored dots     
+* Ensure that the dots don't cause the files to be out of sync     
 
 ```bash
 export LC_ALL=C
@@ -341,19 +341,24 @@ for i in {1..10}; do bioawk -c hdr -v chr="$i" '$2 == chr' joined_teosinte.txt |
 * Unknown positions     
 
 ```bash
-grep “unknown” joined_teosinte.txt > teosinte_unknown_pos.txt
+grep unknown joined_teosinte.txt > teosinte_unknown_pos.txt
 ```
 
 * Multiple positions     
 
 ```bash
-grep “multiple” joined_teosinte.txt > teosinte_multiple_pos.txt
+grep multiple joined_teosinte.txt > teosinte_multiple_pos.txt
 ```
 
 
 
-#### Verification 
+#### Verification to prevent empty files
 ```bash
-wc -l
+wc -l teosinte_chr* teosinte_unknown_pos.txt teosinte_multiple_pos.txt
 ```
 
+
+### Verification of 44 files
+```bash
+ls -1 maize_chr* teosinte_chr* *unknown* *multiple* | wc -l
+```
