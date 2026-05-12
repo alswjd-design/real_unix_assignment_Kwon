@@ -6,56 +6,56 @@
 ### Attributes of fang_et_al_genotypes
 
 
-* only see the header of the file
+* Only see the header of the file
 ``` bash
 head -n 1 fang_et_al_genotypes.txt
 ```
 
 
 
-* only show the last row of the file
+* Only show the last row of the file
 ``` bash
 tail -n 1 fang_et_al_genotypes.txt
 ```
 
 
 
-* output is number of lines
+* Output is number of lines
 ``` bash
 wc -l fang_et_al_genotypes.txt
 ```
 
 
 
-* output shows size of the file
+* Output shows size of the file
 ``` bash
 ls -lh fang_et_al_genotypes.txt
 ```
 
 
 
-* output shows number of columns
+* Output shows number of columns
 ```bash
 awk -F "\t" '{print NF; exit}' fang_et_al_genotypes.txt
 ```
 
 
 
-* more robust output that shows number of columns
+* More robust output that shows number of columns
 ``` bash
 grep -v "^#" fang_et_al_genotypes.txt | awk -F "\t" '{print NF; exit}'
 ```
 
 
 
-* determine whether the file has non-ASCII characters
+* Determine whether the file has non-ASCII characters
 ``` bash
 file fang_et_al_genotypes.txt
 ```
 
 
 
-* output shows first column within 10 rows
+* Output shows first column within 10 rows
 ``` bash
 cut -f 1 fang_et_al_genotypes.txt | head -n 10
 ```
@@ -90,56 +90,56 @@ hexdump -c fang_et_al_genotypes.txt
 ### Attrubutes of snp_position.txt
 
 
-* output is a header
+* Output is a header
 ``` bash
 head -n 1 snp_position.txt
 ```
 
 
 
-* output is a last row of the file
+* Output is a last row of the file
 ```bash
 tail -n 1 snp_position.txt
 ```
 
 
 
-* output is number of lines
+* Output is number of lines
 ```bash
 wc -l snp_position.txt
 ```
 
 
 
-* output shows size of the file
+* Output shows size of the file
 ```bash
 ls -lh snp_position.txt
 ```
 
 
 
-* output shows number of columns
+* Output shows number of columns
 ```bash
 awk -F "\t" '{print NF; exit}' snp_position.txt
 ```
 
 
 
-* more robust output that shows number of columns
+* More robust output that shows number of columns
 ```bash
 grep -v "^#" snp_position.txt | awk -F "\t" '{print NF; exit}'
 ```
 
 
 
-* determine whether the file has non-ASCII characters
+* Determine whether the file has non-ASCII characters
 ```bash
 file snp_position.txt
 ```
 
 
 
-* output shows first column within 10 rows
+* Output shows first column within 10 rows
 ```bash
 cut -f 1 snp_position.txt | head -n 10
 ```
